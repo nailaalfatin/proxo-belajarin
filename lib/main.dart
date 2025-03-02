@@ -17,7 +17,7 @@ class BelajarinApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Manrope',
+        fontFamily: 'Satoshi',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(color: Color(0xFF757575)),

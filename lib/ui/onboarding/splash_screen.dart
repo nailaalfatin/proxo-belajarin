@@ -77,8 +77,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               ),
               child: Image.asset(
                 'assets/logos/belajarin-logo.png',
-                width: 50,
-                height: 50,
+                width: 160,
+                height: 160,
                 alignment: Alignment.center,
               ),
             ),

@@ -1,166 +1,131 @@
+import 'package:belajarin_app/models/classes.dart';
+import 'package:belajarin_app/ui/home/components/banner.dart';
+import 'package:belajarin_app/ui/home/components/popular_books.dart';
+import 'package:belajarin_app/ui/home/components/popular_classes.dart';
+import 'package:belajarin_app/ui/home/components/recommendations.dart';
+import 'package:belajarin_app/ui/home/components/search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // State kategori terpilih (0 = "Semua")
+  int selectedCategory = 0;
+
+  // Daftar kategori
+  final List<String> categories = [
+    "Semua",
+    "Matematika",
+    "Fisika",
+    "Kimia",
+    "Biologi",
+  ];
+
+  @override
   Widget build(BuildContext context) {
+    // 1. Filter data sesuai kategori
+    List<AllClass> filteredClasses;
+    if (selectedCategory == 0) {
+      filteredClasses = allClasses;
+    } else {
+      String selectedSubject = categories[selectedCategory];
+      filteredClasses = allClasses
+          .where((item) =>
+              item.subject.toLowerCase() == selectedSubject.toLowerCase())
+          .toList();
+    }
+
+    // 2. Ambil 4 item pertama untuk Recommendations
+    final List<AllClass> recommendedData = filteredClasses.take(4).toList();
+
+    // 3. Untuk PopularClasses: ambil 3 item berikutnya yang judulnya pendek
+    // Misalnya, batas panjang judul adalah 30 karakter.
+    const int maxTitleLength = 30;
+    final List<AllClass> popularData = filteredClasses
+        .skip(4)
+        .where((item) => item.title.length <= maxTitleLength)
+        .take(3)
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.white,
-        title: const Row(
+        elevation: 0,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Selamat Pagi, Jenna 👋",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Selamat Pagi, Aleya👋',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              'Siap belajar hari ini?',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+              ),
             ),
           ],
         ),
-        actions: [
-          IconButton(icon: const Icon(LucideIcons.calendar, color: Colors.black), onPressed: () {}),
-          IconButton(icon: const Icon(LucideIcons.bell, color: Colors.black), onPressed: () {}),
-          IconButton(icon: const Icon(LucideIcons.bookmark, color: Colors.black), onPressed: () {}),
+        actions: const [
+          Icon(Icons.calendar_today, color: Colors.grey),
+          SizedBox(width: 10),
+          Icon(Icons.notifications, color: Colors.grey),
+          SizedBox(width: 10),
+          Icon(Icons.person, color: Colors.grey),
+          SizedBox(width: 16),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            _buildSearchBar(),
-            const SizedBox(height: 20),
-            _buildPointsAndRanking(),
-            const SizedBox(height: 20),
-            _buildPromoBanner(),
-            const SizedBox(height: 20),
-            _buildRecommendationSection(),
-            const SizedBox(height: 20),
-            _buildPopularClasses(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          // Susun tampilan
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SearchBarWidget(),
+              const SizedBox(height: 20),
+              const BannerWidget(),
+              const SizedBox(height: 20),
+
+              // RECOMMENDATIONS: 4 item (horizontal)
+              Recommendations(
+                categories: categories,
+                selectedCategory: selectedCategory,
+                onCategorySelected: (int index) {
+                  setState(() {
+                    selectedCategory = index;
+                  });
+                },
+                filteredClasses: recommendedData,
+              ),
+
+              const SizedBox(height: 20),
+
+              // POPULAR CLASSES: 3 item dengan judul pendek (vertical)
+              PopularClasses(popularData: popularData),
+              const SizedBox(height: 20),
+              const PopularBooks()
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: "Cari Kursus",
-        prefixIcon: const Icon(Icons.search),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        filled: true,
-        fillColor: Colors.grey[200],
-      ),
-    );
-  }
-
-  Widget _buildPointsAndRanking() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 5)],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildInfoTile("Point", "420", LucideIcons.coins),
-          _buildInfoTile("Ranking", "6", LucideIcons.medal),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoTile(String title, String value, IconData icon) {
-    return Row(
-      children: [
-        Icon(icon, size: 20),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
-            Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPromoBanner() {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Center(
-        child: Text(
-          "Diskon 45% dengan membeli kursus ini sekarang juga",
-          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRecommendationSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Rekomendasi", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text("Lihat Semua", style: TextStyle(color: Colors.blue)),
-          ],
-        ),
-        const SizedBox(height: 10),
-        // Dummy Recommendation List
-        Container(
-          height: 120,
-          color: Colors.grey[300],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPopularClasses() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Kelas Populer", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text("Lihat Semua", style: TextStyle(color: Colors.blue)),
-          ],
-        ),
-        const SizedBox(height: 10),
-        // Dummy Popular Classes List
-        Container(
-          height: 120,
-          color: Colors.grey[300],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
-        BottomNavigationBarItem(icon: Icon(Icons.library_books), label: "Kelas Ku"),
-        BottomNavigationBarItem(icon: Icon(Icons.mail), label: "Inbox"),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Pembelian"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil"),
-      ],
     );
   }
 }
