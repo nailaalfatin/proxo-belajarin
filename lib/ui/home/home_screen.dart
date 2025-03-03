@@ -4,6 +4,7 @@ import 'package:belajarin_app/ui/home/components/popular_books.dart';
 import 'package:belajarin_app/ui/home/components/popular_classes.dart';
 import 'package:belajarin_app/ui/home/components/recommendations.dart';
 import 'package:belajarin_app/ui/home/components/search_bar.dart';
+import 'package:belajarin_app/ui/save%20material/save_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,20 +77,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        actions: const [
-          Icon(Icons.calendar_today, color: Colors.grey),
-          SizedBox(width: 10),
-          Icon(Icons.notifications, color: Colors.grey),
-          SizedBox(width: 10),
-          Icon(Icons.person, color: Colors.grey),
-          SizedBox(width: 16),
+        actions: [
+          const Icon(Icons.calendar_today, color: Colors.grey),
+          const SizedBox(width: 10),
+          const Icon(Icons.notifications, color: Colors.grey),
+          IconButton(
+            icon: const Icon(Icons.bookmark_border_outlined, color: Colors.grey),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SaveScreen())
+              );
+            },
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
         ],
       ),
       body: SingleChildScrollView(

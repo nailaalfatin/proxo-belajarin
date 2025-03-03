@@ -1,4 +1,7 @@
 import 'package:belajarin_app/consts.dart';
+import 'package:belajarin_app/ui/auth/Login%20page%201/components/submit_button.dart';
+import 'package:belajarin_app/ui/auth/Login%20page%201/login_screen.dart';
+import 'package:belajarin_app/ui/auth/Login%20page%202/screen_auth.dart';
 import 'package:belajarin_app/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -106,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
+                                builder: (context) => ScreenLogin(),
                               ),
                             );
                           },
