@@ -1,4 +1,5 @@
 import 'package:belajarin_app/consts.dart';
+import 'package:belajarin_app/ui/mentor-profile/teacher_profile_screen.dart.dart';
 import 'package:flutter/material.dart';
 
 class TutorSection extends StatelessWidget {
@@ -22,31 +23,43 @@ class TutorSection extends StatelessWidget {
         Row(
           children: [
             // Foto tutor
-            const CircleAvatar(
-              radius: 24,
-              backgroundImage: AssetImage("assets/images/ethan-yasir.png"),
-            ),
-            const SizedBox(width: 12),
-
-            // Nama & jabatan
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TeacherProfileScreen()),
+                );
+              },
+              child: Row(
                 children: [
-                  Text(
-                    'Ethan Yasir',
-                    style: textTheme.bodyMedium?.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                  const CircleAvatar(
+                    radius: 24,
+                    backgroundImage:
+                        AssetImage("assets/images/ethan-yasir.png"),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Guru Matematika',
-                    style: textTheme.bodySmall?.copyWith(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Ethan Yasir',
+                          style: textTheme.bodyMedium?.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Guru Matematika',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

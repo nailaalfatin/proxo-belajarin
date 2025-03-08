@@ -4,6 +4,7 @@ import 'package:belajarin_app/ui/home/components/popular_books.dart';
 import 'package:belajarin_app/ui/home/components/popular_classes.dart';
 import 'package:belajarin_app/ui/home/components/recommendations.dart';
 import 'package:belajarin_app/ui/home/components/search_bar.dart';
+import 'package:belajarin_app/ui/inbox/inbox_screen.dart';
 import 'package:belajarin_app/ui/notifikasi/notification_screen.dart';
 import 'package:belajarin_app/ui/save-material/save_screen.dart';
 import 'package:belajarin_app/ui/schedule/schedule_screen.dart';
@@ -16,6 +17,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+  final Map<int, Widget> routes = {
+    0: HomeScreen(),
+    1: SaveScreen(),
+    2: InboxScreen(),
+    3: ScheduleScreen(),
+  };
   int selectedCategory = 0;
   final List<String> categories = [
     "Semua",
@@ -105,15 +113,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, 
+        type: BottomNavigationBarType.fixed,
         selectedIconTheme: const IconThemeData(color: Colors.black),
         unselectedIconTheme: const IconThemeData(color: Colors.grey),
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => routes[index]!),
+          );
+        },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: 'Chat'), 
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

@@ -25,7 +25,7 @@ class BelajarinApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        canvasColor: Colors.white, // Jika widget lain menggunakan canvasColor
+        canvasColor: Colors.white, 
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,

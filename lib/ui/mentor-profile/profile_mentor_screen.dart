@@ -1,5 +1,5 @@
 
-import 'package:belajarin_app/ui/mentor%20profile/components/categories_mentor.dart';
+import 'package:belajarin_app/ui/mentor-profile/components/categories.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMentorScreen extends StatefulWidget {
@@ -117,7 +117,7 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
                       ],
                     ),
                     const SizedBox(height: 5), 
-                    const CategoriesMentor()
+                    const StatisticsWidget()
                   ],
                 )
               ),
