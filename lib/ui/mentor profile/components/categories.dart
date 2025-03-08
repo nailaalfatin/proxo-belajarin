@@ -1,6 +1,6 @@
 import 'package:belajarin_app/consts.dart';
 import 'package:belajarin_app/ui/mentor%20profile/components/course_tab.dart';
-import 'package:belajarin_app/ui/save%20material/components/course_model.dart';
+import 'package:belajarin_app/ui/save-material/components/course_model.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesMentor extends StatefulWidget {

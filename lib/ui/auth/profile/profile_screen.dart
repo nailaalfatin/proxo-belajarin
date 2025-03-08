@@ -22,6 +22,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
        leading: Padding(
@@ -121,7 +122,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: primaryColor),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 const Text(
                   "Akun Anda sudah siap digunakan. Anda akan diarahkan ke halaman beranda dalam beberapa detik",
                   textAlign: TextAlign.center,
@@ -134,15 +135,18 @@ class _ProfilScreenState extends State<ProfilScreen> {
         );
       },
     );
-       Future.delayed(const Duration(seconds: 2), () {
-        if (mounted) {
-      Navigator.of(context).pop();
-       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const HomeScreen())
-       );
+      
+      Future.delayed(
+        const Duration(seconds: 1), () {
+          if (mounted) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (Route<dynamic> route) => false,
+            );
+          }
         }
-    });
-  }
+      );
+    }
   }
 
   Widget _buildTextField(TextEditingController controller, String hintText) {
@@ -210,9 +214,9 @@ class _ProfilScreenState extends State<ProfilScreen> {
       color: Colors.grey[100],
       borderRadius: BorderRadius.circular(30),
     ),
-    child: Row(
+    child: const Row(
       children: [
-        const Text(
+        Text(
           "Perempuan",
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),

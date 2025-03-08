@@ -7,18 +7,29 @@ class Recommendations extends StatelessWidget {
   final List<String> categories;
   final int selectedCategory;
   final ValueChanged<int> onCategorySelected;
-  final List<AllClass> filteredClasses;
+  final List<AllClass> allClasses; // Daftar lengkap data kelas
 
   const Recommendations({
     super.key,
     required this.categories,
     required this.selectedCategory,
     required this.onCategorySelected,
-    required this.filteredClasses,
+    required this.allClasses,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Filter data berdasarkan kategori yang dipilih
+    List<AllClass> filteredClasses;
+    if (selectedCategory == 0) {
+      filteredClasses = allClasses;
+    } else {
+      filteredClasses = allClasses.where((item) {
+        return item.subject.toLowerCase() ==
+            categories[selectedCategory].toLowerCase();
+      }).toList();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,14 +43,14 @@ class Recommendations extends StatelessWidget {
                 "Rekomendasi",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18, 
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 "Lihat Semua",
                 style: TextStyle(
-                  fontSize: 14, 
+                  fontSize: 14,
                   color: primaryColor,
                 ),
               ),
@@ -47,7 +58,6 @@ class Recommendations extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-
         // Kategori (Horizontal)
         SizedBox(
           height: 40,
@@ -62,7 +72,7 @@ class Recommendations extends StatelessWidget {
                   onTap: () => onCategorySelected(index),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20, 
+                      horizontal: 20,
                       vertical: 10,
                     ),
                     decoration: BoxDecoration(
@@ -84,8 +94,7 @@ class Recommendations extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-
-        // Daftar Card Horizontal
+        // Daftar Card Horizontal (hasil filter)
         SizedBox(
           height: 270,
           child: SingleChildScrollView(
@@ -102,19 +111,17 @@ class Recommendations extends StatelessWidget {
   }
 
   Widget _buildRecommendationCard(AllClass item, BuildContext context) {
-    // Hanya card dengan judul ini yang bisa di-klik
-    bool isClickable = item.title == "Fungsi, Persamaan, dan Pertidaksamaan Rasional";
+    // Contoh: hanya card dengan judul tertentu yang bisa di-klik
+    bool isClickable =
+        item.title == "Fungsi, Persamaan, dan Pertidaksamaan Rasional";
 
     return MouseRegion(
-      // Jika card bisa diklik, gunakan kursor 'click'.
-      // Jika tidak, gunakan kursor 'forbidden' (lingkaran dilarang).
       cursor: isClickable
           ? SystemMouseCursors.click
           : SystemMouseCursors.forbidden,
       child: GestureDetector(
         onTap: isClickable
             ? () {
-                // Navigasi ke DetailScreen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -122,7 +129,7 @@ class Recommendations extends StatelessWidget {
                   ),
                 );
               }
-            : null, // Jika null, card tidak bisa di-tap
+            : null,
         child: Container(
           width: 260,
           margin: const EdgeInsets.only(left: 16),
@@ -146,7 +153,8 @@ class Recommendations extends StatelessWidget {
             children: [
               // Gambar
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(16)),
                 child: Image.asset(
                   item.imageUrl,
                   height: 140,
@@ -182,7 +190,11 @@ class Recommendations extends StatelessWidget {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        const Icon(
+                          Icons.star, 
+                          color: Colors.amber,
+                           size: 16
+                          ),
                         const SizedBox(width: 4),
                         Text(
                           item.rating.toString(),

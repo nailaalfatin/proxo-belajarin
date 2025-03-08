@@ -4,21 +4,17 @@ import 'package:belajarin_app/ui/home/components/popular_books.dart';
 import 'package:belajarin_app/ui/home/components/popular_classes.dart';
 import 'package:belajarin_app/ui/home/components/recommendations.dart';
 import 'package:belajarin_app/ui/home/components/search_bar.dart';
-import 'package:belajarin_app/ui/save%20material/save_screen.dart';
+import 'package:belajarin_app/ui/save-material/save_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // State kategori terpilih (0 = "Semua")
   int selectedCategory = 0;
-
-  // Daftar kategori
   final List<String> categories = [
     "Semua",
     "Matematika",
@@ -29,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Filter data sesuai kategori
+    // Filter data sesuai kategori
     List<AllClass> filteredClasses;
     if (selectedCategory == 0) {
       filteredClasses = allClasses;
@@ -41,11 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
           .toList();
     }
 
-    // 2. Ambil 4 item pertama untuk Recommendations
+    // Ambil 4 item pertama untuk Recommendations (misalnya)
     final List<AllClass> recommendedData = filteredClasses.take(4).toList();
 
-    // 3. Untuk PopularClasses: ambil 3 item berikutnya yang judulnya pendek
-    // Misalnya, batas panjang judul adalah 30 karakter.
+    // Untuk PopularClasses: ambil 3 item berikutnya (contoh)
     const int maxTitleLength = 30;
     final List<AllClass> popularData = filteredClasses
         .skip(4)
@@ -61,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Selamat Pagi, Aleya👋',
+              'Selamat Pagi, Aleya 👋🏻',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -78,16 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-          const Icon(Icons.calendar_today, color: Colors.grey),
+          const Icon(Icons.calendar_today, color: Colors.black),
           const SizedBox(width: 10),
-          const Icon(Icons.notifications, color: Colors.grey),
+          const Icon(Icons.notifications, color: Colors.black),
           IconButton(
-            icon: const Icon(Icons.bookmark_border_outlined, color: Colors.grey),
+            icon: const Icon(Icons.bookmark_border_outlined, color: Colors.black),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SaveScreen())
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SaveScreen()));
             },
           ),
         ],
@@ -96,13 +89,12 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          // Susun tampilan
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -110,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
               const BannerWidget(),
               const SizedBox(height: 20),
-
-              // RECOMMENDATIONS: 4 item (horizontal)
+              // RECOMMENDATIONS menggunakan Categories widget
               Recommendations(
                 categories: categories,
                 selectedCategory: selectedCategory,
@@ -120,15 +111,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     selectedCategory = index;
                   });
                 },
-                filteredClasses: recommendedData,
+                allClasses: recommendedData,
               ),
-
               const SizedBox(height: 20),
-
-              // POPULAR CLASSES: 3 item dengan judul pendek (vertical)
               PopularClasses(popularData: popularData),
               const SizedBox(height: 20),
-              const PopularBooks()
+              const PopularBooks(),
             ],
           ),
         ),

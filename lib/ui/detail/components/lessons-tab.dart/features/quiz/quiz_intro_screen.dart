@@ -81,7 +81,7 @@ class QuizIntroScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   // Navigasi ke halaman soal
-                  Navigator.push(
+                  Navigator.pop(
                     context,
                     MaterialPageRoute(
                       builder: (_) => QuizQuestionScreen(quizTitle: quizTitle),

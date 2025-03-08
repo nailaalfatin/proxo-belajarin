@@ -32,7 +32,10 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(
+            Icons.arrow_back_ios, 
+            color: Colors.black
+          ),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -43,14 +46,14 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
             final sectionTitle = section["sectionTitle"] as String;
             final sectionDuration = section["sectionDuration"] as String;
             final items = section["items"] as List<Map<String, dynamic>>;
-
+      
             // Apakah ini Bagian 1 atau Bagian 2?
             final bool isLessonSection = (sectionTitle == "Bagian 1 - Pendahuluan" ||
                 sectionTitle == "Bagian 2 - Dasar - Dasar");
-
+      
             // Apakah ini Latihan Soal?
             final bool isLatihanSoal = (sectionTitle == "Latihan Soal");
-
+      
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -77,16 +80,16 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
                   ],
                 ),
                 const SizedBox(height: 8),
-
+      
                 // Daftar item
                 Column(
                   children: items.asMap().entries.map((entry) {
                     final index = entry.key;
                     final data = entry.value;
-
+      
                     // Kumpulkan widget agar bisa sisipkan video di atas item
                     final widgets = <Widget>[];
-
+      
                     // Jika item sedang diputar, tampilkan video inline
                     final hasVideo = (data["videoUrl"] != null);
                     if (_currentVideoUrl != null && hasVideo &&
@@ -98,12 +101,12 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
                         ),
                       );
                     }
-
+      
                     // Apakah kita tampilkan ikon play?
                     // -> True jika "Bagian 1" atau "Bagian 2"
                     // -> False jika "Latihan Soal"
                     final bool hidePlayButton = !isLessonSection;
-
+      
                     // Build item
                     widgets.add(
                       LessonItem(
@@ -113,7 +116,7 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
                         hidePlayButton: hidePlayButton,
                         onPlayPressed: () {
                           final title = data["title"] ?? "";
-
+      
                           // 1) Jika "Fungsi Rasional" => play video
                           if (title == "Fungsi Rasional") {
                             if (hasVideo) {
@@ -140,14 +143,14 @@ class _AllLessonsScreenState extends State<AllLessonsScreen> {
                         },
                       ),
                     );
-
+      
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: widgets,
                     );
                   }).toList(),
                 ),
-
+      
                 const SizedBox(height: 16),
               ],
             );

@@ -1,10 +1,18 @@
+import 'package:belajarin_app/providers/save_provider.dart';
 import 'package:belajarin_app/ui/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(const BelajarinApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => SaveProvider(),
+      child: const BelajarinApp(),
+    ),
+  );
 }
+
 
 class BelajarinApp extends StatelessWidget {
   const BelajarinApp({super.key});
@@ -17,6 +25,12 @@ class BelajarinApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
+        canvasColor: Colors.white, // Jika widget lain menggunakan canvasColor
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
         fontFamily: 'Satoshi',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(
@@ -24,7 +38,7 @@ class BelajarinApp extends StatelessWidget {
           bodySmall: TextStyle(color: Color(0xFF757575)),
         ),
       ),
-      initialRoute: '/', // SplashScreen sebagai halaman pertama
+      initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
       },

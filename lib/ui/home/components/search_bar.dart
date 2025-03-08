@@ -16,10 +16,10 @@ class SearchBarWidget extends StatelessWidget {
                 color: Colors.grey,
               ),
               filled: true,
-              fillColor: Colors.grey[200],
+              fillColor: Colors.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+                borderSide: const BorderSide(color: Color(0xFFEAEAEA)),
               ),
             ),
           ),
