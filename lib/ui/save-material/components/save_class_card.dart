@@ -1,56 +1,17 @@
 import 'package:belajarin_app/models/classes.dart';
+import 'package:belajarin_app/ui/save-material/components/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:belajarin_app/providers/save_provider.dart';
 import 'package:belajarin_app/consts.dart';
 
-class PopularClasses extends StatelessWidget {
-  final List<AllClass> popularData;
+class SaveClassCard extends StatelessWidget {
+  final AllClass item;
 
-  const PopularClasses({super.key, required this.popularData});
+  const SaveClassCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Kelas Populer",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18, 
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "Lihat Semua",
-                style: TextStyle(
-                  fontSize: 14, 
-                  color: primaryColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-
-        // 3 item (vertical)
-        Column(
-          children: popularData.map((item) {
-            return _buildPopularClass(context, item);
-          }).toList(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPopularClass(BuildContext context, AllClass item) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
@@ -80,7 +41,7 @@ class PopularClasses extends StatelessWidget {
                 ),
               ),
             ),
-            // Info
+            // Informasi kelas
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -118,12 +79,11 @@ class PopularClasses extends StatelessWidget {
                 ),
               ),
             ),
-            // Bookmark button menggunakan Provider
+            // Tombol bookmark dengan pop up bottom sheet jika sudah disimpan
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Builder(
                 builder: (context) {
-                  // Dengan listen: true (default) agar widget rebuild saat data berubah.
                   final saveProvider = Provider.of<SaveProvider>(context);
                   bool isSaved = saveProvider.isSaved(item);
                   return IconButton(
@@ -132,8 +92,25 @@ class PopularClasses extends StatelessWidget {
                       color: primaryColor,
                     ),
                     onPressed: () {
-                      // Untuk aksi, kita bisa gunakan listen: false (opsional) jika ingin menghindari rebuild tambahan.
-                      Provider.of<SaveProvider>(context, listen: false).toggleSaved(item);
+                      if (isSaved) {
+                        // Jika sudah disimpan, tampilkan konfirmasi hapus bookmark
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          isScrollControlled: true,
+                          builder: (context) => BottomSheetWidget(
+                            item: item,
+                            onRemove: () {
+                              Provider.of<SaveProvider>(context, listen: false)
+                                  .toggleSaved(item);
+                            },
+                          ),
+                        );
+                      } else {
+                        // Jika belum, langsung simpan
+                        Provider.of<SaveProvider>(context, listen: false)
+                            .toggleSaved(item);
+                      }
                     },
                   );
                 },

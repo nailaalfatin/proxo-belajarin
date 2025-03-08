@@ -1,11 +1,16 @@
-import 'package:belajarin_app/consts.dart';
-import 'package:belajarin_app/ui/save%20material/components/course_model.dart';
+import 'package:belajarin_app/models/classes.dart';
 import 'package:flutter/material.dart';
+import 'package:belajarin_app/consts.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  final Course course;
+  final AllClass item;
+  final VoidCallback onRemove;
 
-  const BottomSheetWidget({super.key, required this.course});
+  const BottomSheetWidget({
+    super.key,
+    required this.item,
+    required this.onRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +25,14 @@ class BottomSheetWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               "Hapus dari Bookmark?",
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             const SizedBox(height: 25),
             Container(
@@ -45,28 +51,22 @@ class BottomSheetWidget extends StatelessWidget {
               padding: const EdgeInsets.all(9),
               child: Row(
                 children: [
-                  Image.asset(course.imageUrl, width: 100, height: 100),
+                  Image.asset(item.imageUrl, width: 100, height: 100),
                   const SizedBox(width: 30),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              course.category,
-                              style: TextStyle(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const Spacer(),
-                            Icon(Icons.bookmark,
-                                size: 20, color: primaryColor),
-                          ],
+                        Text(
+                          item.subject,
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          course.title,
+                          item.title,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -76,11 +76,14 @@ class BottomSheetWidget extends StatelessWidget {
                         const SizedBox(height: 18),
                         Row(
                           children: [
-                            const Icon(Icons.star,
-                                color: Colors.orange, size: 18),
+                            const Icon(
+                              Icons.star, 
+                              color: Colors.orange, 
+                              size: 18
+                            ),
                             const SizedBox(width: 4),
                             Text(
-                              course.rating.toString(),
+                              item.rating.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -102,7 +105,7 @@ class BottomSheetWidget extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child:Text(
+                    child: Text(
                       "Batal",
                       style: TextStyle(
                         fontSize: 16,
@@ -123,6 +126,7 @@ class BottomSheetWidget extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      onRemove();
                     },
                     child: const Text(
                       "Ya, Hapus",

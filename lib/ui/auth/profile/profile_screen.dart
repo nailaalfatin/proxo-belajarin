@@ -22,6 +22,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
@@ -192,7 +193,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: primaryColor),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 const Text(
                   "Akun Anda sudah siap digunakan. Anda akan diarahkan ke halaman beranda dalam beberapa detik",
                   textAlign: TextAlign.center,
@@ -205,13 +206,99 @@ class _ProfilScreenState extends State<ProfilScreen> {
         );
       },
     );
-       Future.delayed(const Duration(seconds: 2), () {
-        if (mounted) {
-      Navigator.of(context).pop();
-       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const HomeScreen())
-       );
+      
+      Future.delayed(
+        const Duration(seconds: 1), () {
+          if (mounted) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (Route<dynamic> route) => false,
+            );
+          }
         }
+<<<<<<< HEAD
     });
   }
   }
+=======
+      );
+    }
+  }
+
+  Widget _buildTextField(TextEditingController controller, String hintText) {
+    return TextField(
+      controller: controller,
+      readOnly: true,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
+        filled: true,
+        fillColor: Colors.grey[100],
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldWithIcon(TextEditingController controller, String hintText, IconData icon) {
+    return TextField(
+      controller: controller,
+      readOnly: true,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
+        filled: true,
+        fillColor: Colors.grey[100],
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide.none,
+        ),
+        suffixIcon: Icon(icon, color: primaryColor, size: 18),
+      ),
+    );
+  }
+
+  Widget _buildPhoneNumberField() {
+    return TextField(
+      readOnly: true,
+      decoration: InputDecoration(
+        hintText: "+62 856 005 213",
+        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
+        filled: true,
+        fillColor: Colors.grey[100],
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/images/indo-flag.png', width: 24),
+        ),
+      ),
+    );
+  }
+
+ Widget _buildGenderField() {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+    decoration: BoxDecoration(
+      color: Colors.grey[100],
+      borderRadius: BorderRadius.circular(30),
+    ),
+    child: const Row(
+      children: [
+        Text(
+          "Perempuan",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ],
+    ),
+  );
+}
+
+>>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c

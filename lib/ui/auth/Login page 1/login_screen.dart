@@ -1,5 +1,5 @@
 import 'package:belajarin_app/consts.dart';
-import 'package:belajarin_app/ui/auth/Login%20page%201/components/submit_button.dart';
+import 'package:belajarin_app/ui/auth/login%20page%201/components/submit_button.dart';
 import 'package:flutter/material.dart';
 
 class ScreenLogin extends StatefulWidget {
@@ -13,7 +13,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: backgroundColor,
       body: Center(
         child: Column(
            mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:belajarin_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarWidget extends StatelessWidget {
@@ -7,7 +8,7 @@ class NavigationBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: 0,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: primaryColor,
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
       items: const [

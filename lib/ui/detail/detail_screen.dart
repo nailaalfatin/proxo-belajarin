@@ -35,6 +35,7 @@ class _DetailScreenState extends State<DetailScreen>
     final AllClass item = widget.item;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: _buildBottomNavigationBar(),
       body: SafeArea(
         child: SingleChildScrollView(

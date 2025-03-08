@@ -16,7 +16,6 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3),
@@ -120,7 +119,7 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
                       ],
                     ),
                     const SizedBox(height: 5), 
-                    CategoriesMentor()
+                    const CategoriesMentor()
                   ],
                 )
               ),

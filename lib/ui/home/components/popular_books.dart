@@ -15,7 +15,7 @@ class PopularBooks extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Kelas Populer",
+                "Buku Populer",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -133,7 +133,7 @@ class PopularBooks extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Icon(
                 Icons.bookmark_border,
                 color: primaryColor,

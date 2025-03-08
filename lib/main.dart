@@ -1,12 +1,23 @@
+<<<<<<< HEAD
 import 'package:belajarin_app/ui/mentor%20profile/profile_mentor_screen.dart';
+=======
+import 'package:belajarin_app/providers/save_provider.dart';
+>>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c
 import 'package:belajarin_app/ui/onboarding/splash_screen.dart';
 import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(const BelajarinApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => SaveProvider(),
+      child: const BelajarinApp(),
+    ),
+  );
 }
+
 
 class BelajarinApp extends StatelessWidget {
   const BelajarinApp({super.key});
@@ -19,6 +30,12 @@ class BelajarinApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
+        canvasColor: Colors.white, // Jika widget lain menggunakan canvasColor
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
         fontFamily: 'Satoshi',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(
@@ -26,7 +43,7 @@ class BelajarinApp extends StatelessWidget {
           bodySmall: TextStyle(color: Color(0xFF757575)),
         ),
       ),
-      initialRoute: '/', // SplashScreen sebagai halaman pertama
+      initialRoute: '/',
       routes: {
         '/': (context) => const ProfileMentorScreen(),
       },
