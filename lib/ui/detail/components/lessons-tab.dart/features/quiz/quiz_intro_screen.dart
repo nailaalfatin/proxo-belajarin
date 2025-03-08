@@ -80,8 +80,7 @@ class QuizIntroScreen extends StatelessWidget {
                   backgroundColor: primaryColor, // Ganti warna sesuai brand
                 ),
                 onPressed: () {
-                  // Navigasi ke halaman soal
-                  Navigator.pop(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => QuizQuestionScreen(quizTitle: quizTitle),

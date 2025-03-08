@@ -1,4 +1,4 @@
-import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
+import 'package:belajarin_app/ui/search-page/search_page_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -42,7 +42,7 @@ class SearchBarWidget extends StatelessWidget {
   void _navigateToSearchPage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const SearchPage()),
+      MaterialPageRoute(builder: (context) => const SearchPageScreen()),
     );
   }
 }

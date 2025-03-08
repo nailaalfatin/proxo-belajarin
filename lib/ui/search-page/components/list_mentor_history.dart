@@ -1,18 +1,19 @@
-import 'package:belajarin_app/consts.dart';
 import 'package:flutter/material.dart';
 
 class ListMentor extends StatelessWidget {
   final List<Map<String, String>> mentors = [
     {"name": "Fini Charisa", "image": "assets/images/fini-charisa.png"},
-    {"name": "KevinS.", "image": "assets/images/kevinS.png"},
-    {"name": "AlienaCai", "image": "assets/images/AlienaCai.png"},
-    {"name": "YokoBomb", "image": "assets/images/YokoBomb.png"},
-    {"name": "DeaAfrizal", "image": "assets/images/DeaAfrizal.png"},
-    {"name": "RachelHow", "image": "assets/images/RachelHow.png"},
-    {"name": "LilyC", "image": "assets/images/Lily-C.png"},
-    {"name": "GalangS.", "image": "assets/images/Galang-S..png"},
+    {"name": "Kevin S.", "image": "assets/images/kevinS.png"},
+    {"name": "Aliena Cai", "image": "assets/images/AlienaCai.png"},
+    {"name": "Yok Bomb", "image": "assets/images/YokoBomb.png"},
+    {"name": "Dea Afrizal", "image": "assets/images/DeaAfrizal.png"},
+    {"name": "Rachel How", "image": "assets/images/RachelHow.png"},
+    {"name": "Lily C", "image": "assets/images/Lily-C.png"},
+    {"name": "Galang S.", "image": "assets/images/Galang-S..png"},
     {"name": "Syhntia.", "image": "assets/images/Synthia.png"},
   ];
+
+  ListMentor({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ListMentor extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "Lihat Semua",
                   style: TextStyle(color: Colors.blueAccent, fontSize: 14),
                 ),

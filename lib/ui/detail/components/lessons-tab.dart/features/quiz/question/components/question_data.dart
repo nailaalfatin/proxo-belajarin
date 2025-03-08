@@ -14,7 +14,7 @@ final List<Map<String, dynamic>> quizQuestions = [
   },
   {
     "question":
-        "Perhatikan grafik fungsi f(x) = x² - 1. Berapakah domain fungsi tersebut?",
+        "Perhatikan grafik fungsi f(x) = x² - \1. Berapakah domain fungsi tersebut?",
     "image": "assets/images/quiz-2.png",
     "options": [
       "x | x ≥ 1, x ∈ ℝ",
