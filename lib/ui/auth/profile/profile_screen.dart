@@ -216,11 +216,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
             );
           }
         }
-<<<<<<< HEAD
-    });
-  }
-  }
-=======
       );
     }
   }
@@ -301,4 +296,3 @@ class _ProfilScreenState extends State<ProfilScreen> {
   );
 }
 
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c

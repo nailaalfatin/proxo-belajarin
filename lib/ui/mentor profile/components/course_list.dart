@@ -1,5 +1,5 @@
+import 'package:belajarin_app/ui/save-material/components/course_model.dart';
 import 'package:flutter/material.dart';
-import 'package:belajarin_app/ui/save%20material/components/course_model.dart';
 
 class CourseList extends StatelessWidget {
   final String category;

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import 'package:belajarin_app/ui/mentor%20profile/profile_mentor_screen.dart';
-=======
 import 'package:belajarin_app/providers/save_provider.dart';
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c
-import 'package:belajarin_app/ui/onboarding/splash_screen.dart';
-import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
+import 'package:belajarin_app/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +40,7 @@ class BelajarinApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const ProfileMentorScreen(),
+        '/': (context) => const HomeScreen(),
       },
     );
   }
