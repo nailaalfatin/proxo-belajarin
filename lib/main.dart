@@ -1,5 +1,7 @@
 import 'package:belajarin_app/providers/save_provider.dart';
-import 'package:belajarin_app/ui/mentor%20profile/profile_mentor_screen.dart';
+import 'package:belajarin_app/ui/home/home_screen.dart';
+import 'package:belajarin_app/ui/inbox/inbox_screen.dart';
+import 'package:belajarin_app/ui/mentor%20profile/Teacher_profile_screen.dart.dart';
 import 'package:belajarin_app/ui/onboarding/splash_screen.dart';
 import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class BelajarinApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        canvasColor: Colors.white, // Jika widget lain menggunakan canvasColor
+        canvasColor: Colors.white, 
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -42,7 +44,7 @@ class BelajarinApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => const InboxScreen(),
       },
     );
   }
