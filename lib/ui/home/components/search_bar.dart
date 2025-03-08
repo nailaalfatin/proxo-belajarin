@@ -1,3 +1,4 @@
+import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -7,19 +8,23 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded( // Tambahkan Expanded di sini
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Cari Kursus",
-              prefixIcon: const Icon(
-                Icons.search, 
-                color: Colors.grey,
-              ),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFEAEAEA)),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              _navigateToSearchPage(context);
+            },
+            child: AbsorbPointer(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Cari Kursus",
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFFEAEAEA)),
+                  ),
+                ),
               ),
             ),
           ),
@@ -27,10 +32,17 @@ class SearchBarWidget extends StatelessWidget {
         const SizedBox(width: 10),
         Image.asset(
           "assets/logos/filter.png",
-          width: 50, // Tambahkan ukuran agar tidak terlalu besar
+          width: 50,
           height: 50,
         ),
       ],
+    );
+  }
+
+  void _navigateToSearchPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SearchPage()),
     );
   }
 }

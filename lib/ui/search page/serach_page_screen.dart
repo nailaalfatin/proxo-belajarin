@@ -8,7 +8,7 @@ import 'components/best_mentor.dart';
 import 'components/popular_class.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  const SearchPage({super.key,});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -19,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
   final FocusNode _focusNode = FocusNode();
   bool isSearching = false;
   bool showSearchResults = false;
-  String searchQuery = ""; // ini untuk Menyimpan query pencarian user
+  String searchQuery = ""; 
 
   List<String> searchHistory = [
     "Sistem Reproduksi",

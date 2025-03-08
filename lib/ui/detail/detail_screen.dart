@@ -66,7 +66,7 @@ class _DetailScreenState extends State<DetailScreen>
                 ),
               ),
               SizedBox(
-                height: 600, // Atur sesuai konten atau device
+                height: 600, 
                 child: TabBarView(
                   controller: _tabController,
                   children: const [

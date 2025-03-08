@@ -4,13 +4,9 @@ import 'package:belajarin_app/ui/home/components/popular_books.dart';
 import 'package:belajarin_app/ui/home/components/popular_classes.dart';
 import 'package:belajarin_app/ui/home/components/recommendations.dart';
 import 'package:belajarin_app/ui/home/components/search_bar.dart';
-<<<<<<< HEAD
 import 'package:belajarin_app/ui/notifikasi/notification_screen.dart';
-import 'package:belajarin_app/ui/save%20material/save_screen.dart';
-import 'package:belajarin_app/ui/schedule/schedule_screen.dart';
-=======
 import 'package:belajarin_app/ui/save-material/save_screen.dart';
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c
+import 'package:belajarin_app/ui/schedule/schedule_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -79,85 +75,48 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-<<<<<<< HEAD
-         IconButton(
-            icon:
-                const Icon(Icons.calendar_today, color: Colors.grey),
+          IconButton(
+            icon: const Icon(Icons.calendar_today_rounded, color: Colors.black),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()));
             },
           ),
-          IconButton(
-            icon:
-                const Icon(Icons.notifications, color: Colors.grey),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const NotificationScreen()));
-            },
-          ),
-          IconButton(
-            icon:
-                const Icon(Icons.bookmark_border_outlined, color: Colors.grey),
-            onPressed: () {
-              Navigator.push(context,
-=======
-          const Icon(Icons.calendar_today, color: Colors.black),
           const SizedBox(width: 10),
-          const Icon(Icons.notifications, color: Colors.black),
           IconButton(
-            icon: const Icon(Icons.bookmark_border_outlined, color: Colors.black),
+            icon: const Icon(Icons.notifications, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationScreen()));
+            },
+          ),
+          IconButton(
+            icon:
+                const Icon(Icons.bookmark_border_outlined, color: Colors.black),
             onPressed: () {
               Navigator.push(context,
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c
                   MaterialPageRoute(builder: (context) => const SaveScreen()));
             },
           ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, 
+        selectedIconTheme: const IconThemeData(color: Colors.black),
+        unselectedIconTheme: const IconThemeData(color: Colors.grey),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chat'), 
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
-<<<<<<< HEAD
-      body: Container(
-        color: Colors.white, 
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            // Susun tampilan
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SearchBarWidget(),
-                const SizedBox(height: 20),
-                const BannerWidget(),
-                const SizedBox(height: 20),
-
-                // RECOMMENDATIONS: 4 item (horizontal)
-                Recommendations(
-                  categories: categories,
-                  selectedCategory: selectedCategory,
-                  onCategorySelected: (int index) {
-                    setState(() {
-                      selectedCategory = index;
-                    });
-                  },
-                  filteredClasses: recommendedData,
-                ),
-
-                const SizedBox(height: 20),
-
-                // POPULAR CLASSES: 3 item dengan judul pendek (vertical)
-                PopularClasses(popularData: popularData),
-                const SizedBox(height: 20),
-                const PopularBooks()
-              ],
-            ),
-=======
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -184,7 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
               const PopularBooks(),
             ],
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c
           ),
         ),
       ),

@@ -22,7 +22,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
@@ -215,15 +214,10 @@ class _ProfilScreenState extends State<ProfilScreen> {
               (Route<dynamic> route) => false,
             );
           }
-        }
-<<<<<<< HEAD
-    });
+        });
   }
   }
-=======
-      );
-    }
-  }
+  
 
   Widget _buildTextField(TextEditingController controller, String hintText) {
     return TextField(
@@ -301,4 +295,3 @@ class _ProfilScreenState extends State<ProfilScreen> {
   );
 }
 
->>>>>>> db62044dc4473bb97f40b9e7fd59086cc77c753c

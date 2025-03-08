@@ -1,5 +1,5 @@
+import 'package:belajarin_app/ui/save-material/components/course_model.dart';
 import 'package:flutter/material.dart';
-import 'package:belajarin_app/ui/save%20material/components/course_model.dart';
 
 class CourseList extends StatelessWidget {
   final String category;
@@ -19,25 +19,13 @@ class CourseList extends StatelessWidget {
       imageUrl: "assets/images/react_native.png",
       rating: 4.5,
     ),
-    Course(
-      title: "Logika Matematika Dasar",
-      category: "Logika Matematika",
-      imageUrl: "assets/images/logika.png",
-      rating: 4.8,
-    ),
-    Course(
-      title: "Matematika Diskrit",
-      category: "Logika Matematika",
-      imageUrl: "assets/images/diskrit.png",
-      rating: 4.6,
-    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     List<Course> filteredCourses = sampleCourses
         .where((course) => course.category == category)
-        .take(2) // Menampilkan maksimal 2 kursus
+        .take(2) 
         .toList();
 
     return Expanded(
