@@ -10,12 +10,12 @@ class ProfilScreen extends StatefulWidget {
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
-  final TextEditingController namaLengkapController = TextEditingController(text: "Aleya Niswaty");
-  final TextEditingController namaPanggilanController = TextEditingController(text: "Aleya");
+  final TextEditingController namaLengkapController = TextEditingController();
+  final TextEditingController namaPanggilanController = TextEditingController();
   final TextEditingController tanggalLahirController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController noHpController = TextEditingController();
-  String selectedGender = "Perempuan";
+  String? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-       leading: Padding(
+        leading: Padding(
           padding: const EdgeInsets.all(4),
           child: Container(
             margin: const EdgeInsets.only(left: 8),
@@ -44,64 +44,135 @@ class _ProfilScreenState extends State<ProfilScreen> {
         ),
         centerTitle: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('assets/images/profile.png'),
-                ),
-                Container(
-                  width: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: primaryColor
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('assets/images/profile.png'),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.white, size: 20),
-                    onPressed: () {},
+                  Container(
+                    width: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: primaryColor
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.white, size: 20),
+                      onPressed: () {},
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            _buildTextField(namaLengkapController, "Aleya Niswaty"),
-            const SizedBox(height: 16),
-            _buildTextField(namaPanggilanController, "Aleya"),
-            const SizedBox(height: 16),
-            _buildTextFieldWithIcon(tanggalLahirController, "12/12/2000", Icons.calendar_today),
-            const SizedBox(height: 16),
-            _buildTextFieldWithIcon(emailController, "AleyaNiswantu@gmail.com", Icons.email),
-            const SizedBox(height: 16),
-            _buildPhoneNumberField(),
-            const SizedBox(height: 16),
-            _buildGenderField(),
-            const SizedBox(height: 60),
-            ElevatedButton(
-              onPressed: () {
-                _showCustomPopup();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
+                ],
               ),
-              child: const Text("Lanjutkan", style: TextStyle(fontSize: 18, color: Colors.white)),
-            ),
-          ],
+              const SizedBox(height: 40),
+              _buildTextField(namaLengkapController, "Nama Lengkap"),
+              const SizedBox(height: 16),
+              _buildTextField(namaPanggilanController, "Nama Panggilan"),
+              const SizedBox(height: 16),
+              _buildTextFieldWithIcon(tanggalLahirController, "Tanggal Lahir", Icons.calendar_today),
+              const SizedBox(height: 16),
+              _buildTextFieldWithIcon(emailController, "Email", Icons.email),
+              const SizedBox(height: 16),
+              _buildPhoneNumberField(),
+              const SizedBox(height: 16),
+              _buildGenderDropdown(),
+              const SizedBox(height: 60),
+              ElevatedButton(
+                onPressed: () {
+                  _showCustomPopup();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: const Text("Lanjutkan", style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  
+  Widget _buildTextField(TextEditingController controller, String hintText) {
+    return TextField(
+      controller: controller,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+        filled: true,
+        fillColor: Colors.grey[100],
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldWithIcon(TextEditingController controller, String hintText, IconData icon) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+        filled: true,
+        fillColor: Colors.grey[100],
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide.none,
+        ),
+        suffixIcon: Icon(icon, color: primaryColor, size: 18),
+      ),
+    );
+  }
+
+  Widget _buildPhoneNumberField() {
+    return _buildTextField(noHpController, "Nomor HP");
+  }
+
+  Widget _buildGenderDropdown() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: selectedGender,
+          dropdownColor: Colors.white,
+          hint: const Text("Jenis Kelamin", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w400)),
+          isExpanded: true,
+          items: ["Perempuan", "Laki-laki"].map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child:
+              Text(value, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              selectedGender = newValue;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   void _showCustomPopup() {
     showDialog(
       context: context,
@@ -144,80 +215,3 @@ class _ProfilScreenState extends State<ProfilScreen> {
     });
   }
   }
-
-  Widget _buildTextField(TextEditingController controller, String hintText) {
-    return TextField(
-      controller: controller,
-      readOnly: true,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
-        filled: true,
-        fillColor: Colors.grey[100],
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextFieldWithIcon(TextEditingController controller, String hintText, IconData icon) {
-    return TextField(
-      controller: controller,
-      readOnly: true,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
-        filled: true,
-        fillColor: Colors.grey[100],
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
-        ),
-        suffixIcon: Icon(icon, color: primaryColor, size: 18),
-      ),
-    );
-  }
-
-  Widget _buildPhoneNumberField() {
-    return TextField(
-      readOnly: true,
-      decoration: InputDecoration(
-        hintText: "+62 856 005 213",
-        hintStyle: const TextStyle(color: Colors.black, fontSize: 14),
-        filled: true,
-        fillColor: Colors.grey[100],
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
-        ),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/indo-flag.png', width: 24),
-        ),
-      ),
-    );
-  }
-
- Widget _buildGenderField() {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-    decoration: BoxDecoration(
-      color: Colors.grey[100],
-      borderRadius: BorderRadius.circular(30),
-    ),
-    child: Row(
-      children: [
-        const Text(
-          "Perempuan",
-          style: TextStyle(color: Colors.black, fontSize: 14),
-        ),
-      ],
-    ),
-  );
-}
-

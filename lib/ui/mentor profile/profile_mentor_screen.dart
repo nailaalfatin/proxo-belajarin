@@ -1,4 +1,7 @@
-import 'package:belajarin_app/ui/mentor%20profile/components/categories.dart';
+
+import 'package:belajarin_app/ui/mentor%20profile/components/categories_mentor.dart';
+import 'package:belajarin_app/ui/save%20material/components/categories.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMentorScreen extends StatefulWidget {
@@ -36,7 +39,7 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Container(
           alignment: Alignment.topCenter,
           child: Column(
@@ -119,7 +122,7 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
                     const SizedBox(height: 5), 
                     CategoriesMentor()
                   ],
-                ),
+                )
               ),
             ],
           ),
@@ -128,3 +131,5 @@ class _ProfileMentorScreenState extends State<ProfileMentorScreen> {
     );
   }
 }
+
+

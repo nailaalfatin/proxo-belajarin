@@ -14,6 +14,33 @@ class _AuthFormState extends State<AuthForm> {
   bool _isPasswordVisible = false;
   final _formKey = GlobalKey<FormState>();
 
+  void _submitForm() {
+  if (_formKey.currentState!.validate()) {
+    //login berhasil 
+    bool loginBerhasil = false; 
+
+    if (!loginBerhasil) {
+      _showSnackbar("Maaf kata sandi anda salah");
+    }
+  }
+}
+
+void _showSnackbar(String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.all(0),
+      duration: Duration(seconds: 2),
+    ),
+  );
+}
+
+
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email tidak boleh kosong';
@@ -51,11 +78,8 @@ class _AuthFormState extends State<AuthForm> {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hintText: 'Masukkan email Anda',
-              hintStyle: const TextStyle(
-                fontSize: 14,
-              ),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              hintStyle: const TextStyle(fontSize: 14),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             ),
             validator: _validateEmail,
           ),
@@ -71,9 +95,7 @@ class _AuthFormState extends State<AuthForm> {
             obscureText: !_isPasswordVisible,
             decoration: InputDecoration(
               hintText: 'Masukkan kata sandi Anda',
-              hintStyle: const TextStyle(
-                fontSize: 14,
-              ),
+              hintStyle: const TextStyle(fontSize: 14),
               suffixIcon: IconButton(
                 icon: Icon(
                   _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -84,26 +106,20 @@ class _AuthFormState extends State<AuthForm> {
                   });
                 },
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             ),
             validator: _validatePassword,
           ),
           const SizedBox(height: 2),
 
-          // Lupa Password
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ScreenForgot()),
-                  );
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ScreenForgot()),
+                );
               },
               child: const Text('Lupa kata sandi?'),
             ),
@@ -112,21 +128,19 @@ class _AuthFormState extends State<AuthForm> {
           const SizedBox(height: 15),
 
           ElevatedButton(
-            onPressed: () {},
+            onPressed: _submitForm,
             style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                )),
+              backgroundColor: primaryColor,
+              elevation: 0,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
             child: const Text(
               "Lanjutkan",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -137,24 +151,13 @@ class _AuthFormState extends State<AuthForm> {
             child: Row(
               children: [
                 Expanded(
-                  child: Divider(
-                    indent: 20,
-                    color: Colors.black54,
-                    thickness: 1,
-                  ),
+                  child: Divider(indent: 20, color: Colors.black54, thickness: 1),
                 ),
                 SizedBox(width: 8),
-                Text(
-                  'atau',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
+                Text('atau', style: TextStyle(fontSize: 16, color: Colors.grey)),
                 SizedBox(width: 8),
                 Expanded(
-                  child: Divider(
-                    endIndent: 20,
-                    color: Colors.black54,
-                    thickness: 1,
-                  ),
+                  child: Divider(endIndent: 20, color: Colors.black54, thickness: 1),
                 ),
               ],
             ),
@@ -167,9 +170,7 @@ class _AuthFormState extends State<AuthForm> {
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 50),
               side: const BorderSide(color: Colors.grey, width: 1),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -178,10 +179,7 @@ class _AuthFormState extends State<AuthForm> {
                 SizedBox(width: 8),
                 Text(
                   "Masuk dengan Apple",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ],
             ),
@@ -194,24 +192,16 @@ class _AuthFormState extends State<AuthForm> {
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 50),
               side: const BorderSide(color: Colors.grey, width: 1),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/Icon-google.png',
-                  height: 24,
-                ),
+                Image.asset('assets/images/Icon-google.png', height: 24),
                 const SizedBox(width: 8),
                 const Text(
                   "Masuk dengan Google",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ],
             ),
@@ -223,26 +213,17 @@ class _AuthFormState extends State<AuthForm> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Belum punya akun? ',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
+                const Text('Belum punya akun? ', style: TextStyle(fontSize: 16, color: Colors.grey)),
                 InkWell(
-                  onTap: () {
-                    const Text('Navigasi ke halaman Daftar');
-                  },
+                  onTap: () {},
                   child: Text(
                     'Daftar',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, color: primaryColor, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
