@@ -1,5 +1,9 @@
 import 'package:belajarin_app/providers/save_provider.dart';
 import 'package:belajarin_app/ui/home/home_screen.dart';
+import 'package:belajarin_app/providers/save_provider.dart';
+import 'package:belajarin_app/ui/mentor%20profile/profile_mentor_screen.dart';
+import 'package:belajarin_app/ui/onboarding/splash_screen.dart';
+import 'package:belajarin_app/ui/search%20page/serach_page_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

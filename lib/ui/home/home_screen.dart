@@ -4,7 +4,9 @@ import 'package:belajarin_app/ui/home/components/popular_books.dart';
 import 'package:belajarin_app/ui/home/components/popular_classes.dart';
 import 'package:belajarin_app/ui/home/components/recommendations.dart';
 import 'package:belajarin_app/ui/home/components/search_bar.dart';
+import 'package:belajarin_app/ui/notifikasi/notification_screen.dart';
 import 'package:belajarin_app/ui/save-material/save_screen.dart';
+import 'package:belajarin_app/ui/schedule/schedule_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,11 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-          const Icon(Icons.calendar_today, color: Colors.black),
-          const SizedBox(width: 10),
-          const Icon(Icons.notifications, color: Colors.black),
           IconButton(
-            icon: const Icon(Icons.bookmark_border_outlined, color: Colors.black),
+            icon: const Icon(Icons.calendar_today_rounded, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()));
+            },
+          ),
+          const SizedBox(width: 10),
+          IconButton(
+            icon: const Icon(Icons.notifications, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationScreen()));
+            },
+          ),
+          IconButton(
+            icon:
+                const Icon(Icons.bookmark_border_outlined, color: Colors.black),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const SaveScreen()));
@@ -86,9 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, 
+        selectedIconTheme: const IconThemeData(color: Colors.black),
+        unselectedIconTheme: const IconThemeData(color: Colors.grey),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Kelas'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chat'), 
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
